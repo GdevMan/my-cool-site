@@ -3,56 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="robots" content="index, follow" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta name="description" content="My daily news site." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Main</title>
   <style>
+    .main {
+      text-align: center;
+    }
     body {
       font-family: Arial, sans-serif;
       margin: 20px auto;
       max-width: 700px;
       background-color: black;
-      color: #222;
+      color: purple;
       padding: 20px;
     }
-    h1 {
-      color: blue;
-    }
-    p {
-      margin: 8px 0 4px 0;
-      color: blueviolet;
-    }
-    a {
-      display: block;
-      margin-bottom: 12px;
-      color: #1a73e8;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: aqua;
-    }
-    h3 {
-      margin-top: 30px;
-      color: blue;
-    }
-    h2 {
-      color: blue;
-    }
-    /* Guest/User messages */
+    h1 { color: blue; }
     #guest-message, #user-message {
       padding: 10px;
       margin-bottom: 20px;
       border-radius: 6px;
       font-weight: bold;
     }
-    #guest-message {
-      background-color: #333;
-      color: #eee;
-    }
-    #user-message {
-      background-color: #1a73e8;
+    #guest-message { background-color: #333; color: #eee; }
+    #user-message { background-color: #1a73e8; color: white; }
+    button {
+      margin-left: 10px;
+      padding: 8px 16px;
+      cursor: pointer;
+      background-color: red;
       color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: darkred;
     }
   </style>
 </head>
@@ -65,39 +54,56 @@
 
   <div id="user-message" style="display:none;">
     Welcome back, <span id="user-email"></span>!
+    <button id="logoutButton" style="display:none;">Log Out</button>
   </div>
-
+  <div class="main">
   <h1>Welcome!</h1>
-  <p>Note: We are sorry for the newsletter subscription service. We are trying to get it back working...</p>
+  <h1>--------------------------------------------------------------------</h1>
+  </div>
+  <h1>Top 3 best browser gaming sites</h1>
+  <h3>1: CrazyGames</h3>
+  <h3>2: Poki</h3>
+  <h3>3: Y8</h3>
+  <p>Visit the sites at:<br>
 
-  <h3>Visit the TOP sites!</h3>
-  <p>1:</p>
-  <a href="https://explore.org/" target="_blank" rel="noopener noreferrer">Explore.org</a>
-  <p>2:</p>
-  <a href="https://reddit.com" target="_blank" rel="noopener noreferrer">reddit</a>
-  <p>3:</p>
-  <a href="https://neal.fun/" target="_blank" rel="noopener noreferrer">neil.fun</a>
+    CrazyGames: <a href="https://www.crazygames.com">https://www.crazygames.com</a><br>
+    Poki: <a href="https://poki.com">https://poki.com</a><br>
+    Y8: <a href="https://www.y8.com">https://www.y8.com</a><br>
 
-  <h1>TODAY'S NEWS</h1>
-
-  <h2>Meet Mexico’s Xin Xin, the last panda on earth NOT owned by China</h2>
-  <p>
-    Xin Xin is the world’s only giant panda not owned by China and the last of her kind in Mexico. Born at Mexico City’s Chapultepec Zoo on July 1, 1990, she has reached 35 years of age — equivalent to more than 100 human years — and is among the oldest pandas alive. (AP Video: Martin Silva Rey) 
-    Video included in original page: <a href="https://apnews.com/hub/china" target="_blank" rel="noopener noreferrer">https://apnews.com/hub/china</a>
   </p>
+  <h1>--------------------------------------------------------------------</h1>
+  <h1>Popular locations to visit!</h1>
+  <h3>1: Swiss Alps</h3>
+  <img src="swissapls.webp">
+  <p>Snow-covered mountains, charming towns and flower-strewn meadows make the Swiss Alps a year-round fairy-tale destination. Visit in the winter for world-class skiing (and après-ski fondue and drinks) in locales such as the exclusive St. Moritz and the picturesque Zermatt, home of the craggy Matterhorn. Opt for warmer months to hike through the verdant valleys of Swiss National Park or attend lively festivals in the foothill town of Montreux. Regardless of the time of year, no trip would be complete without a visit to the Jungfrau Region, where you can saunter through idyllic mountain villages like Grindelwald and Mürren or take the Jungfrau Railway to Europe's highest railway station.</p>
 
-  <h1>Yesterday's news</h1>
-  <h2>Zelenskyy seeks talks with Trump and European leaders on slow progress of peace efforts with Russia</h2>
-  <p>
-    Ukrainian President Volodymyr Zelenskyy says Ukrainian officials want to meet with U.S. President Donald Trump and European leaders next week to discuss recent developments in efforts to end the three-year war with Russia.
-  </p>
+  <h3>2: Bora Bora</h3>
+  <img src="borabora.webp" width="300" height="300">
+  <p>What this 12-square-mile French Polynesian island may lack in size it makes up for in sheer tropical beauty. Here, you'll find picturesque beaches, lush jungles and luxurious resorts set on surrounding islets. The island's extinct volcano, Mount Otemanu, makes for a great photo-op or challenging hike, and the friendly Bora Bora locals can help you catch a glimpse of the island's best sights during an off-road excursion. To relax, head to Matira Beach for crystal-clear water and postcard-worthy white sand. Although a trip to Bora Bora is pricey, most travelers say it's worth every penny.
+</p>
 
+  <h3>3: Rome</h3>
+  <img src="rome.webp" width="600" height="500">
+  <p>When you visit Italy's capital city, prepare to cross a few must-see landmarks – including the Colosseum, the Trevi Fountain and the Pantheon – off of your bucket list. Travelers can also see some of Italy's greatest treasures, including St. Peter's Basilica and the Sistine Chapel, in Vatican City. Once you get your bearings, peruse some of Rome's lesser-known museums, art galleries and boutiques, or head to Janiculum Hill for panoramic views of the city. The Eternal City is always popular, but with the Catholic Jubilee taking place throughout 2025, expect even more crowds and book accommodations and airfare well in advance.</p>
+  <h1>--------------------------------------------------------------------</h1>
+  <h1>Latest News</h1>
+  <h1>GMAIL THIRD PARTY BREACH</h1>
+  <p>A recent third‑party breach involving Salesforce has exposed data that may put Gmail users at heightened risk of phishing and account compromise. The incident began when attackers gained unauthorized access to parts of Salesforce’s systems used by third‑party developers and service providers. Because many organizations use Salesforce to store or sync email metadata, contact lists, and account recovery information, the breach created a pathway for attackers to obtain contact details and other metadata associated with Gmail accounts. Gmail account credentials were not directly leaked by Google, but the exposed data enables more convincing, targeted phishing campaigns against affected users.
+</p>
+  <h3>What happened</h3>
+  <p>Attackers exploited vulnerable access credentials or misconfigured integrations in an ecosystem of Salesforce-connected services. Through these footholds they extracted customer data held by affected third parties: email addresses, names, job titles, company relationships, and in some cases metadata about recent communications or account recovery hints. That kind of information is valuable for social‑engineering because it allows attackers to craft emails that appear legitimate and relevant to the recipient. In several instances reported by security researchers, the attackers used harvested contact lists and message metadata to build spear‑phishing messages that impersonated colleagues or service providers and referenced recent projects or support requests.</p>
+<h3>Scope and scale</h3>
+<p>Because Salesforce is deeply integrated across sales, support, and marketing tools used by businesses worldwide, the breach’s ripple effects are broad:
+
+    Large numbers of Gmail users whose addresses are stored in compromised Salesforce-linked databases are at increased risk of targeted phishing.
+    Enterprise and small‑business customers whose CRM, ticketing, or marketing platforms were connected to the breached systems may have had customer contact data exposed.
+    The exact number of impacted Gmail users has not been publicly quantified; exposure varies by which third‑party vendors or connectors were compromised and what data those vendors stored.
+</p>
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
   <script>
-    // Your Firebase config (same as index.html)
     const firebaseConfig = {
       apiKey: "AIzaSyD4hz1uLF7qcD5EeIgSGQMO9MEuqVnqYFU",
       authDomain: "my-cool-site-c36c7.firebaseapp.com",
@@ -108,10 +114,9 @@
       measurementId: "G-TB9DMDD8N7"
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-    // Listen for auth state changes
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         showUserFeatures(user);
@@ -123,15 +128,27 @@
     function showGuestFeatures() {
       document.getElementById('guest-message').style.display = 'block';
       document.getElementById('user-message').style.display = 'none';
-      // TODO: Disable premium features here if needed
+      document.getElementById('logoutButton').style.display = 'none'; // Hide log-out button
     }
 
     function showUserFeatures(user) {
       document.getElementById('guest-message').style.display = 'none';
       document.getElementById('user-message').style.display = 'block';
       document.getElementById('user-email').textContent = user.email;
-      // TODO: Enable premium features here if needed
+      document.getElementById('logoutButton').style.display = 'inline'; // Show log-out button
     }
+
+    // Log-out functionality
+    document.getElementById('logoutButton').addEventListener('click', function() {
+      firebase.auth().signOut()
+        .then(() => {
+          alert('Logged out successfully!');
+          window.location.href = 'login.html'; // Redirect to login page
+        })
+        .catch((error) => {
+          alert('Error logging out: ' + error.message);
+        });
+    });
   </script>
 
 </body>

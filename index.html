@@ -4,15 +4,22 @@
   <!-- Firebase App (core) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <!-- Firebase Auth -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" sizes="192x192" href="android-icon-192x192.png">
+  <link rel="icon" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+  <meta name="keywords" content="current events, live news updates, daily news, news">
   <meta charset="UTF-8" />
   <meta name="robots" content="index, follow" />
   <meta name="description" content="My daily news site." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign-Up</title>
   <style>
-    /* Your existing styles here (unchanged) */
     body {
       background-color: black;
       color: #ddd;
@@ -59,20 +66,10 @@
       background-color: #555;
       color: #888;
     }
-    .section {
-      margin-bottom: 60px;
-    }
-    strong {
-      font-family: Georgia, serif;
-      display: block;
-      margin-top: 10px;
-      color: #8a2be2;
-      text-decoration: line-through;
-    }
     h1 {
       color: #1a73e8;
       margin-top: 80px;
-      text-align: center;
+      text-align: left;
     }
   </style>
 </head>
@@ -81,69 +78,53 @@
   <!-- Sign-Up Section -->
   <div class="section">
     <form id="signup">
+      <h1>Sign-Up</h1>
       <label for="email">Email:</label>
       <input id="email" name="email" type="email" required placeholder="Your email" />
 
       <label for="password">Password:</label>
       <input id="password" name="password" type="password" required placeholder="Your password" />
 
-      <button type="submit">Sign Up</button><br><br><br><br><br><br><br><br>
+      <button type="submit">Sign Up</button>
+      <br><br><br><br><br><br><br><br>
       <a href="login.html">Click here if you already have an account!</a><br>
       <a href="main.html">Sign in as guest</a>
     </form>
   </div>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <h1>OUR SUBSCRIPTION SERVICE IS UNDER MAINTENANCE</h1>
-  <p>We dont have an automated email to send news to you</p>
-  <!-- Newsletter Section -->
-  <form id="newsletter">
-    <div class="section">
-      <strong><s>Hey psst!</s></strong>
-      <strong><s>Subscribe to our newsletter!</s></strong>
 
-      <label for="newsletter-email"><s>Email:</s></label>
-      <input id="newsletter-email" name="newsletter-email" type="email" disabled placeholder="Subscription paused" />
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD4hz1uLF7qcD5EeIgSGQMO9MEuqVnqYFU",
+      authDomain: "my-cool-site-c36c7.firebaseapp.com",
+      projectId: "my-cool-site-c36c7",
+      storageBucket: "my-cool-site-c36c7.appspot.com",
+      messagingSenderId: "233337803146",
+      appId: "1:233337803146:web:630cf1d5e1bd3553e0f873",
+      measurementId: "G-TB9DMDD8N7"
+    };
 
-      <button type="submit" disabled>Subscribe</button>
-    </div>
-  </form>
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-<script>
-  // Your Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyD4hz1uLF7qcD5EeIgSGQMO9MEuqVnqYFU",
-    authDomain: "my-cool-site-c36c7.firebaseapp.com",
-    projectId: "my-cool-site-c36c7",
-    storageBucket: "my-cool-site-c36c7.appspot.com",
-    messagingSenderId: "233337803146",
-    appId: "1:233337803146:web:630cf1d5e1bd3553e0f873",
-    measurementId: "G-TB9DMDD8N7"
-  };
+    // Handle sign-up form submit
+    document.getElementById('signup').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
 
-  // Initialize Firebase Auth
-  const auth = firebase.auth();
-
-  // Handle sign-up form submit
-  document.getElementById('signup').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        alert('Sign-up successful! Welcome, ' + userCredential.user.email);
-        // Redirect to main page after sign-up
-        window.location.href = 'main.html';
-      })
-      .catch((error) => {
-        alert('Error: ' + error.message);
-      });
-  });
-</script>
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          alert('Sign-up successful! Welcome, ' + userCredential.user.email);
+          window.location.href = 'main.html'; // Redirect to main page
+        })
+        .catch((error) => {
+          alert('Error: ' + error.message);
+        });
+    });
+  </script>
 
 </body>
 </html>
