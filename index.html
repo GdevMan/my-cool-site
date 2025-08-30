@@ -1,38 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <!-- Firebase App (core) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <!-- Firebase Auth -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="My daily news site." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign-Up</title>
   <style>
+    /* Your existing styles here (unchanged) */
     body {
+      background-color: black;
+      color: #ddd;
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 40px auto;
+      max-width: 700px;
+      padding: 20px;
     }
-
     label {
       display: block;
       margin-top: 15px;
+      color: #b19cd9;
+      font-weight: bold;
     }
-
     input {
       width: 250px;
       padding: 8px;
       margin-top: 5px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #222;
+      color: #eee;
     }
-
+    input::placeholder {
+      color: #777;
+    }
     button {
       margin-top: 15px;
       padding: 10px 20px;
       cursor: pointer;
+      background-color: #1a73e8;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
     }
-
+    button:hover:not(:disabled) {
+      background-color: aqua;
+      color: black;
+    }
+    button:disabled {
+      cursor: not-allowed;
+      background-color: #555;
+      color: #888;
+    }
     .section {
       margin-bottom: 60px;
     }
-
     strong {
       font-family: Georgia, serif;
       display: block;
       margin-top: 10px;
+      color: #8a2be2;
+      text-decoration: line-through;
+    }
+    h1 {
+      color: #1a73e8;
+      margin-top: 80px;
+      text-align: center;
     }
   </style>
 </head>
@@ -40,30 +80,68 @@
 
   <!-- Sign-Up Section -->
   <div class="section">
-<form id="signup" action="main.html" method="get">
-    <label for="name">Name:</label>
-    <input id="name" type="text" required>
+    <form id="signup">
+      <label for="email">Email:</label>
+      <input id="email" name="email" type="email" required placeholder="Your email" />
 
-    <label for="password">Password:</label>
-    <input id="password" type="password" required>
+      <label for="password">Password:</label>
+      <input id="password" name="password" type="password" required placeholder="Your password" />
 
-    <button type="submit" >Sign Up</button>
-</form>
+      <button type="submit">Sign Up</button>
+    </form>
   </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h1>OUR SUBSCRIPTION SERVICE IS UNDER MAINTENANCE</h1>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <h1>OUR SUBSCRIPTION SERVICE IS UNDER MAINTENANCE</h1>
+  <p>We dont have an automated email to send news to you</p>
   <!-- Newsletter Section -->
-<form id="newsletter" action="main.html" method="post">
-  <div class="section">
-    <strong><s>Hey psst!</s></strong>
-    <strong><s>Subscribe to our newsletter!</s></strong>
+  <form id="newsletter">
+    <div class="section">
+      <strong><s>Hey psst!</s></strong>
+      <strong><s>Subscribe to our newsletter!</s></strong>
 
-    <label for="email" required><s>Email:</s></label>
-    <input id="email" type="email">
+      <label for="newsletter-email"><s>Email:</s></label>
+      <input id="newsletter-email" name="newsletter-email" type="email" disabled placeholder="Subscription paused" />
 
-    <button type="submit" disabled style="cursor: not-allowed;">Subscribe</button>
-</form>
-  </div>
+      <button type="submit" disabled>Subscribe</button>
+    </div>
+  </form>
+
+<script>
+  // Your Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyD4hz1uLF7qcD5EeIgSGQMO9MEuqVnqYFU",
+    authDomain: "my-cool-site-c36c7.firebaseapp.com",
+    projectId: "my-cool-site-c36c7",
+    storageBucket: "my-cool-site-c36c7.appspot.com",
+    messagingSenderId: "233337803146",
+    appId: "1:233337803146:web:630cf1d5e1bd3553e0f873",
+    measurementId: "G-TB9DMDD8N7"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Initialize Firebase Auth
+  const auth = firebase.auth();
+
+  // Handle sign-up form submit
+  document.getElementById('signup').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        alert('Sign-up successful! Welcome, ' + userCredential.user.email);
+        // Redirect to main page after sign-up
+        window.location.href = 'main.html';
+      })
+      .catch((error) => {
+        alert('Error: ' + error.message);
+      });
+  });
+</script>
 
 </body>
 </html>

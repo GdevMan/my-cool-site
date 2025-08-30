@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Login to my daily news site." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <style>
+    body {
+      background-color: black;
+      color: #ddd;
+      font-family: Arial, sans-serif;
+      margin: 40px auto;
+      max-width: 700px;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      color: #b19cd9;
+      font-weight: bold;
+    }
+    input {
+      width: 250px;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #222;
+      color: #eee;
+    }
+    input::placeholder {
+      color: #777;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #1a73e8;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: aqua;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Login</h1>
+
+  <form id="loginForm">
+    <label for="email">Email:</label>
+    <input id="email" type="email" required placeholder="Enter your email" />
+
+    <label for="password">Password:</label>
+    <input id="password" type="password" required placeholder="Enter your password" />
+
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD4hz1uLF7qcD5EeIgSGQMO9MEuqVnqYFU",
+      authDomain: "my-cool-site-c36c7.firebaseapp.com",
+      projectId: "my-cool-site-c36c7",
+      storageBucket: "my-cool-site-c36c7.appspot.com",
+      messagingSenderId: "233337803146",
+      appId: "1:233337803146:web:630cf1d5e1bd3553e0f873",
+      measurementId: "G-TB9DMDD8N7"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    const auth = firebase.auth();
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          alert('Login successful! Welcome back, ' + userCredential.user.email);
+          // Redirect to main page after login
+          window.location.href = 'main.html';
+        })
+        .catch((error) => {
+          alert('Error: ' + error.message);
+        });
+    });
+  </script>
+
+</body>
+</html>
