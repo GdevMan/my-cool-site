@@ -1,77 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="robots" content="index, follow" />
-    <meta name="description" content="My daily news site." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="My daily news site." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      max-width: 700px;
+      background-color: black;
+      color: #222;
+      padding: 20px;
+    }
+    h1 {
+      color: blue;
+    }
+    p {
+      margin: 8px 0 4px 0;
+      color: blueviolet;
+    }
+    a {
+      display: block;
+      margin-bottom: 12px;
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: aqua;
+    }
+    h3 {
+      margin-top: 30px;
+      color: blue;
+    }
+    h2 {
+      color: blue;
+    }
+    /* Guest/User messages */
+    #guest-message, #user-message {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    #guest-message {
+      background-color: #333;
+      color: #eee;
+    }
+    #user-message {
+      background-color: #1a73e8;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome!</h1>
-    <p>Note: We are sorry for the newsletter subscription service. We are trying to get it back working...</p>
-<h3>Visit the TOP sites!</h3>
-<p>1:</p>
-<a href="https://explore.org/" target="_blank" rel="noopener noreferrer">Explore.org</a>
-<p>2:</p>
-<a href="https://reddit.com" target="_blank" rel="noopener noreferrer">reddit</a>
-<p>3:</p>
-<a href="https://neal.fun/" target="_blank" rel="noopener noreferrer">neil.fun</a>
 
-<h1>TODAY'S NEWS</h1>
+  <!-- Guest / User messages -->
+  <div id="guest-message" style="display:none;">
+    You are browsing as a guest. <a href="login.html" style="color: aqua;">Sign in</a> for more features!
+  </div>
 
-<h2>Meet Mexico’s Xin Xin, the last panda on earth NOT owned by China</h2>
-<p>
-Xin Xin is the world’s only giant panda not owned by China and the last of her kind in Mexico. Born at Mexico City’s Chapultepec Zoo on July 1, 1990, she has reached 35 years of age — equivalent to more than 100 human years — and is among the oldest pandas alive. (AP Video: Martin Silva Rey) 
-Video inculded in original page: <a href="https://apnews.com/hub/china">https://apnews.com/hub/china</a>
-</p>
-<h1>Yesterday's news</h1>
-<h2>Zelenskyy seeks talks with Trump and European leaders on slow progress of peace efforts with Russia</h2>
-<p>Ukrainian President Volodymyr Zelenskyy says Ukrainian officials want to meet with U.S. President Donald Trump and European leaders next week to discuss recent developments in efforts to end the three-year war with Russia.</p>
-</ol>
+  <div id="user-message" style="display:none;">
+    Welcome back, <span id="user-email"></span>!
+  </div>
+
+  <h1>Welcome!</h1>
+  <p>Note: We are sorry for the newsletter subscription service. We are trying to get it back working...</p>
+
+  <h3>Visit the TOP sites!</h3>
+  <p>1:</p>
+  <a href="https://explore.org/" target="_blank" rel="noopener noreferrer">Explore.org</a>
+  <p>2:</p>
+  <a href="https://reddit.com" target="_blank" rel="noopener noreferrer">reddit</a>
+  <p>3:</p>
+  <a href="https://neal.fun/" target="_blank" rel="noopener noreferrer">neil.fun</a>
+
+  <h1>TODAY'S NEWS</h1>
+
+  <h2>Meet Mexico’s Xin Xin, the last panda on earth NOT owned by China</h2>
+  <p>
+    Xin Xin is the world’s only giant panda not owned by China and the last of her kind in Mexico. Born at Mexico City’s Chapultepec Zoo on July 1, 1990, she has reached 35 years of age — equivalent to more than 100 human years — and is among the oldest pandas alive. (AP Video: Martin Silva Rey) 
+    Video included in original page: <a href="https://apnews.com/hub/china" target="_blank" rel="noopener noreferrer">https://apnews.com/hub/china</a>
+  </p>
+
+  <h1>Yesterday's news</h1>
+  <h2>Zelenskyy seeks talks with Trump and European leaders on slow progress of peace efforts with Russia</h2>
+  <p>
+    Ukrainian President Volodymyr Zelenskyy says Ukrainian officials want to meet with U.S. President Donald Trump and European leaders next week to discuss recent developments in efforts to end the three-year war with Russia.
+  </p>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Your Firebase config (same as index.html)
+    const firebaseConfig = {
+      apiKey: "AIzaSyD4hz1uLF7qcD5EeIgSGQMO9MEuqVnqYFU",
+      authDomain: "my-cool-site-c36c7.firebaseapp.com",
+      projectId: "my-cool-site-c36c7",
+      storageBucket: "my-cool-site-c36c7.appspot.com",
+      messagingSenderId: "233337803146",
+      appId: "1:233337803146:web:630cf1d5e1bd3553e0f873",
+      measurementId: "G-TB9DMDD8N7"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Listen for auth state changes
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        showUserFeatures(user);
+      } else {
+        showGuestFeatures();
+      }
+    });
+
+    function showGuestFeatures() {
+      document.getElementById('guest-message').style.display = 'block';
+      document.getElementById('user-message').style.display = 'none';
+      // TODO: Disable premium features here if needed
+    }
+
+    function showUserFeatures(user) {
+      document.getElementById('guest-message').style.display = 'none';
+      document.getElementById('user-message').style.display = 'block';
+      document.getElementById('user-email').textContent = user.email;
+      // TODO: Enable premium features here if needed
+    }
+  </script>
+
 </body>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  h1 {
-    color: blue;
-  }
-  p {
-    margin: 8px 0 4px 0;
-    color: blueviolet;
-  }
-  a {
-    display: block;
-    margin-bottom: 12px;
-    color: #1a73e8;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-    color: aqua;
-  }
-  h3 {
-  margin-top: 30px;
-  color: blue;
-}
-body {
-  background-color: black;
-  color: #222;
-}
-body {
-  max-width: 700px;
-  margin: 20px auto;
-  background-color: rgb(0, 0, 0);
-  color: #222;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-h2 {
-  color: blue;
-}
-
-</style>
-
 </html>
