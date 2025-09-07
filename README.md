@@ -1,2 +1,2 @@
 # my-cool-site
-epik website!!!!
+Cool news site
