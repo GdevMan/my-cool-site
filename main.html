@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta charset="UTF-8" />
   <meta name="robots" content="index, follow" />
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <meta http-equiv="X-Frame-Options" content="DENY">
@@ -12,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Main</title>
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -28,9 +27,8 @@
 
   <div class="main">
     <h1>Welcome!</h1>
-    <h1>--------------------------------------------------------------------</h1>
+    <hr>
   </div>
-  
   
   <p>You can find our news here:</p>
   <a href="articles.html" class="styled-button">Our articles</a><br><br><br>
@@ -38,27 +36,27 @@
   <p>Or:</p>
   <a class="styled-button" href="Chess.html">Learn how to play chess here!!!</a>
 
-  <h1>--------------------------------------------------------------------</h1>
+  <hr>
   <h1>Want to share feedback, ideas or a story? Share it here!</h1>
   <form action="https://formspree.io/f/mdklgkpy" method="POST">
-  <label for="email">
-    Your Email (Optional):
-    <input type="email" id="email" name="email" placeholder="Your email (optional)">
-  </label><br><br>
+    <label for="email">
+      Your Email (Optional):
+      <input type="email" id="email" name="email" placeholder="Your email (optional)">
+    </label><br><br>
 
-  <label for="message">
-    Your Feedback:<br>
-    <textarea id="message" name="message" rows="4" cols="50" placeholder="Enter your feedback here..." required></textarea>
-  </label><br><br>
+    <label for="message">
+      Your Feedback:<br>
+      <textarea id="message" name="message" rows="4" cols="50" placeholder="Enter your feedback here..." required></textarea>
+    </label><br><br>
 
-  <button type="submit">Send Feedback</button>
-</form>
-
+    <button type="submit">Send Feedback</button>
+  </form>
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
+  <!-- Place script at end of body for safe DOM access -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyD4hz1uLF7qcD5EeIgSGQMO9MEuqVnqYFU",
@@ -85,8 +83,8 @@
       document.getElementById('guest-message').style.display = 'block';
       document.getElementById('user-message').style.display = 'none';
       document.getElementById('logoutButton').style.display = 'none'; // Hide log-out button
-
-      // Hide all <p> tags for guests
+      
+      // Hide all .guest-only elements for guests
       const guestOnlyElements = document.querySelectorAll('.guest-only');
       guestOnlyElements.forEach(el => el.style.display = 'none');
     }
@@ -97,7 +95,7 @@
       document.getElementById('user-email').textContent = user.email;
       document.getElementById('logoutButton').style.display = 'inline'; // Show log-out button
 
-      // Show all <p> tags for logged-in users
+      // Show all .guest-only elements for logged-in users
       const guestOnlyElements = document.querySelectorAll('.guest-only');
       guestOnlyElements.forEach(el => el.style.display = 'block');
     }
@@ -113,7 +111,9 @@
           alert('Error logging out: ' + error.message);
         });
     });
-    document.cookie = "visit_site=Yes/True";
+
+    // Set cookie with standard value and expiration example
+    document.cookie = "visit_site=true; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/";
   </script>
 
   <p>Our sources: <a href="https://Reuters.com">Reuters</a>, <a href="https://newsapi.org">newsAPI</a> and more...</p>
